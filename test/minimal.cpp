@@ -1,4 +1,4 @@
-#include "../matplotlibcpp.h"
+#include <matplotlib-cpp/matplotlibcpp.h>
 
 namespace plt = matplotlibcpp;
 

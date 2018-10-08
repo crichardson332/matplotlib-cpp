@@ -4,6 +4,13 @@ matplotlib-cpp
 Welcome to matplotlib-cpp, possibly the simplest C++ plotting library.
 It is built to resemble the plotting API used by Matlab and matplotlib.
 
+Setup
+-----
+Create a file called ~/.matplotlib/matplotlibrc and add the following
+line:
+```bash
+backend : tkAgg
+```
 
 
 Usage
@@ -30,7 +37,7 @@ A more comprehensive example:
 
 namespace plt = matplotlibcpp;
 
-int main() 
+int main()
 {
     // Prepare data.
     int n = 5000;
@@ -73,26 +80,26 @@ matplotlib-cpp doesn't require C++11, but will enable some additional syntactic 
 using namespace std;
 namespace plt = matplotlibcpp;
 
-int main() 
-{    
+int main()
+{
     // Prepare data.
     int n = 5000; // number of data points
-    vector<double> x(n),y(n); 
+    vector<double> x(n),y(n);
     for(int i=0; i<n; ++i) {
         double t = 2*M_PI*i/n;
         x.at(i) = 16*sin(t)*sin(t)*sin(t);
         y.at(i) = 13*cos(t) - 5*cos(2*t) - 2*cos(3*t) - cos(4*t);
     }
 
-    // plot() takes an arbitrary number of (x,y,format)-triples. 
+    // plot() takes an arbitrary number of (x,y,format)-triples.
     // x must be iterable (that is, anything providing begin(x) and end(x)),
-    // y must either be callable (providing operator() const) or iterable. 
+    // y must either be callable (providing operator() const) or iterable.
     plt::plot(x, y, "r-", x, [](double d) { return 12.5+abs(sin(d)); }, "k-");
 
 
     // show plots
     plt::show();
-} 
+}
 ```
     g++ modern.cpp -std=c++11 -I/usr/include/python2.7 -lpython
 
@@ -201,10 +208,10 @@ The same technique can be used for linking against a custom build of python
 
 Why?
 ----
-I initially started this library during my diploma thesis. The usual approach of 
+I initially started this library during my diploma thesis. The usual approach of
 writing data from the c++ algorithm to a file and afterwards parsing and plotting
 it in python using matplotlib proved insufficient: Keeping the algorithm
-and plotting code in sync requires a lot of effort when the C++ code frequently and substantially 
+and plotting code in sync requires a lot of effort when the C++ code frequently and substantially
 changes. Additionally, the python yaml parser was not able to cope with files that
 exceed a few hundred megabytes in size.
 
